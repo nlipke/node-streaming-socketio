@@ -23,6 +23,12 @@ var org = nforce.createConnection({
   environment: config.ENVIRONMENT  // optional, sandbox or production, production default
 });
 
+console.log({config.CLIENT_ID,
+  clientSecret: config.CLIENT_SECRET,
+    redirectUri: config.CALLBACK_URL + '/oauth/_callback',
+      mode: 'multi',
+        environment: config.ENVIRONMENT});
+
 function update(id) {
    console.log(id);
 }
