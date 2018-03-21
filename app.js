@@ -28,6 +28,7 @@ console.log({clientId: config.CLIENT_ID,
   redirectUri: config.CALLBACK_URL + '/oauth/_callback',
   mode: 'multi',
   environment: config.ENVIRONMENT});
+console.log({ username: config.USERNAME, password: config.PASSWORD });
 
 function update(id) {
    console.log(id);
