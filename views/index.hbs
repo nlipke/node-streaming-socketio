@@ -6,13 +6,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
+      function clicked(button) {
+        button.disabled = true;
+        var div = button.parentElement;
+        div.style.color='gray';
+        var id = div.getAttribute('data-part-request-id');
+        console.log(id);
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              console.log(xhr.responseText);
+            }
+        };
+
+        xhr.open('GET', 'http://localhost:3001/updateRecord?id=' + id, true);
+        xhr.send();
+      }
       var url = window.location.href.split("/");
       var socket =  io.connect(url[0] + "//" + url[2]);
       socket.on('record-processed', function (data) {
         var results = JSON.parse(data);
         console.log(results);
-        $('<div>Received Account: '+results['sobject']['Name']+'</div>').prependTo('#messages');
-      })
+        $('<div data-part-request-id="' + results['payload']['Part_Request_ID__c'] + '">Received Event: '+results['payload']['Repair_Part_Name__c']+' <button onclick="clicked(this)">Fulfill</button></div>').prependTo('#messages');
+      });
     </script>
   </head>
   <body>

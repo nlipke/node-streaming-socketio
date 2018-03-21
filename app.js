@@ -23,6 +23,12 @@ var org = nforce.createConnection({
   environment: config.ENVIRONMENT  // optional, sandbox or production, production default
 });
 
+function update(id) {
+   console.log(id);
+}
+
+
+
 org.authenticate({ username: config.USERNAME, password: config.PASSWORD }, function(err, oauth) {
 
   if(err) return console.log(err);
@@ -32,7 +38,7 @@ org.authenticate({ username: config.USERNAME, password: config.PASSWORD }, funct
   }
 
   // subscribe to a pushtopic
-  var str = org.stream({ topic: config.PUSH_TOPIC, oauth: oauth });
+  var str = org.stream({ topic: config.PUSH_TOPIC, oauth: oauth, isSystem: config.IS_SYSTEM, isEvent: config.IS_EVENT });
 
   str.on('connect', function(){
     console.log('Connected to pushtopic: ' + config.PUSH_TOPIC);
@@ -49,6 +55,17 @@ org.authenticate({ username: config.USERNAME, password: config.PASSWORD }, funct
     socket.emit('record-processed', JSON.stringify(data));
   });
 
+    routes.get('/updateRecord', function(req, res, next) {
+      var id = req.query.id;
+      update(id);
+      var Part_Request__c = nforce.createSObject('Part_Request__c');
+      Part_Request__c.set('Id', id);
+      Part_Request__c.set('Fulfilled__c', true);
+      org.update({sobject: Part_Request__c, oauth: oauth}, function (err, response) {
+            if(!err) console.log('It worked!');
+      });
+
+    });
 });
 
 // view engine setup
@@ -101,5 +118,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
-module.exports = {app: app, server: server};
+module.exports = {app: app, server: server, update: update};
