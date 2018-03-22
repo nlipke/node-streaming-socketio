@@ -65,10 +65,9 @@ org.authenticate({ username: config.USERNAME, password: config.PASSWORD }, funct
     routes.get('/updateRecord', function(req, res, next) {
       var id = req.query.id;
       update(id);
-      var Part_Request__c = nforce.createSObject('Part_Request__c');
-      Part_Request__c.set('Id', id);
-      Part_Request__c.set('Fulfilled__c', true);
-      org.update({sobject: Part_Request__c, oauth: oauth}, function (err, response) {
+      var Part_Fulfilled__e = nforce.createSObject('Part_Fulfilled__e');
+      Part_Request__c.set('Requested_Part_ID__c', id);
+      org.insert({sobject: Part_Request__c, oauth: oauth}, function (err, response) {
             if(!err) console.log('It worked!');
       });
 
