@@ -71,6 +71,7 @@ org.authenticate({ username: config.USERNAME, password: config.PASSWORD }, funct
             if(!err) console.log('It worked!');
             if (err) console.log(err);
       });
+      res.send('{}');
 
     });
 });
