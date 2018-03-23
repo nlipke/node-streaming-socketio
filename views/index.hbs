@@ -28,13 +28,13 @@
       socket.on('record-processed', function (data) {
         var results = JSON.parse(data);
         console.log(results);
-        $('<div data-part-request-id="' + results['payload']['Part_Request_ID__c'] + '" style="min-height: 25px; overflow: hidden; ">Part Needed: '+results['payload']['Repair_Part_Name__c']+' <button style="float: right" onclick="clicked(this)">Fulfill</button></div>').prependTo('#messages');
+        $('<div data-part-request-id="' + results['payload']['Part_Request_ID__c'] + '" style="min-height: 25px; overflow: hidden; ">Part Needed: '+results['payload']['Repair_Part_Name__c']+' <button style="float: right" onclick="clicked(this)">Fulfilled</button></div>').prependTo('#messages');
       });
     </script>
   </head>
   <body>
     <h1>{{ title }}</h1>
-    <p>Please order the parts below and click on "Fulfil" onces they're available!</p>
+    <p>Please order the parts below and click on "Fulfilled" onces they're available!</p>
     <div id="messages" style="width: 400px"></div>
   </body>
 </html>
