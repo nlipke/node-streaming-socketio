@@ -1,6 +1,6 @@
 exports.PORT = process.env.PORT || 3001; // use heroku's dynamic port or 3001 if localhost
 exports.DEBUG = true;
-exports.ENVIRONMENT = 'sandbox';
+exports.ENVIRONMENT = process.env.ENVIRONMENT || 'sandbox';
 exports.CALLBACK_URL = process.env.CALLBACK_URL || 'http://localhost:3001';
 exports.PUSH_TOPIC = 'ElectronPartOrderRequest__e';
 exports.IS_EVENT = true;
