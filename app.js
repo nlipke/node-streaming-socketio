@@ -66,9 +66,10 @@ org.authenticate({ username: config.USERNAME, password: config.PASSWORD }, funct
       var id = req.query.id;
       update(id);
       var Part_Fulfilled__e = nforce.createSObject('Part_Fulfilled__e');
-      Part_Request__c.set('Requested_Part_ID__c', id);
-      org.insert({sobject: Part_Request__c, oauth: oauth}, function (err, response) {
+      Part_Fulfilled__e.set('Requested_Part_ID__c', id);
+      org.insert({sobject: Part_Fulfilled__e, oauth: oauth}, function (err, response) {
             if(!err) console.log('It worked!');
+            if (err) console.log(err);
       });
 
     });
