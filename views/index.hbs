@@ -28,7 +28,7 @@
       socket.on('record-processed', function (data) {
         var results = JSON.parse(data);
         console.log(results);
-        $('<div data-part-request-id="' + results['payload']['Part_Request_ID__c'] + '">Received Event: '+results['payload']['Repair_Part_Name__c']+' <button style="float: right" onclick="clicked(this)">Fulfill</button></div>').prependTo('#messages');
+        $('<div data-part-request-id="' + results['payload']['Part_Request_ID__c'] + '" style="min-height: 25px; overflow: hidden; ">Part Needed: '+results['payload']['Repair_Part_Name__c']+' <button style="float: right" onclick="clicked(this)">Fulfill</button></div>').prependTo('#messages');
       });
     </script>
   </head>
