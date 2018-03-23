@@ -67,7 +67,7 @@ org.authenticate({ username: config.USERNAME, password: config.PASSWORD }, funct
       update(id);
       var Part_Fulfilled__e = nforce.createSObject('Part_Fulfilled__e');
       Part_Fulfilled__e.set('Requested_Part_ID__c', id);
-      console.logPart_Fulfilled__e);
+      console.log(Part_Fulfilled__e);
       org.insert({sobject: Part_Fulfilled__e, oauth: oauth}, function (err, response) {
             if(!err) console.log('It worked!');
             if (err) console.log(err);
